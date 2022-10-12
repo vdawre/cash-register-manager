@@ -8,18 +8,25 @@ const availableNotes = [2000, 500, 100, 20, 10, 5, 1];
 
 checkButton.addEventListener("click", function validateBillAndCashAmount() {
   hideMessage();
-  if(billAmount.value === 0){
-    showMessage("No change");
+  if (billAmount.value === cashGiven.value) {
+    showMessage("No change to be given");
   }
-  if (billAmount.value > 0) {
-    if (cashGiven.value >= billAmount.value) {
-      const amountToBeReturned = cashGiven.value - billAmount.value;
-      calculateChange(amountToBeReturned);
+  else {
+    if (billAmount.value > 0) {
+      if (cashGiven.value >= billAmount.value) {
+        const amountToBeReturned = cashGiven.value - billAmount.value;
+        calculateChange(amountToBeReturned);
+      } else {
+        if (cashGiven.value < billAmount.value) {
+          showMessage("Invalid Cash Given");
+        }
+        else {
+          showMessage("Do you wanna wash plates?");
+        }
+      }
     } else {
-      showMessage("Do you wanna wash plates?");
+      showMessage("Invalid Bill Amount");
     }
-  } else {
-    showMessage("Invalid Bill Amount");
   }
 });
 
